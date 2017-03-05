@@ -1,0 +1,14 @@
+<div ng-controller="incomeController as incCtrl" class="modal-demo">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Select Income</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <div class='list-group'>
+            <div class="col-xs-4 col-sm-4" ng-repeat='income in incCtrl.incomes'>
+              <a class='list-group-item'>
+                <img ng-src="{{income.img}}" ng-click="selected.item = income; ok()" style='width:100%'>
+                <p class='text-center muted-text'>{{income.name}}</p>
+              </a>
+            </div>
+        </div>
+      </div>

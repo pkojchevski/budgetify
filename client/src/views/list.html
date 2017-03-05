@@ -1,0 +1,17 @@
+
+  <div class='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1'>
+    <div class="row text-center">
+
+    </div>
+   <ul class="list-group">
+     <div class="row">
+       <li class="list-group-item" ng-repeat= 'l in records'>
+         <span><img class='image' src={{l.img}}></img></span>
+         <div class='name' ng-class="{'text-success' : l.income, 'text-danger': !l.income}">
+           {{l.name}}
+         </div>
+          <span class="value label-as-badge" ng-class="{'label label-success' : l.income, 'label label-danger': !l.income}">{{l.value}}</span>
+       </li>
+     </div>
+  </ul>
+</div>
