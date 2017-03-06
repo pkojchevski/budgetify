@@ -136,6 +136,7 @@ $ctrl.saveUpdateRecords = function(name) {
           }
             return exist;
         });
+      if(arr.length !== 0) {
         arr[0].value += parseInt($ctrl.result);
         var record = new Records({
           _id:arr[0]._id,
@@ -154,7 +155,11 @@ $ctrl.saveUpdateRecords = function(name) {
         }, function(errorResponse) {
           $ctrl.error = errorResponse;
         });
+      } else {
+         //if record does not exist save new record in dbelse {
+        $ctrl.createRecord();
       }
+    }
        //if record does not exist save new record in db
           else {
             $ctrl.createRecord();

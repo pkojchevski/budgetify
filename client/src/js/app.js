@@ -1,5 +1,5 @@
 var app=angular.module("myApp",['ngRoute',"myApp.controllers", "myApp.services","myApp.directives",
-  "myApp.filters", "nvd3", 'ui.bootstrap', 'angular-growl']);
+  "myApp.filters", "nvd3", 'ui.bootstrap', 'angular-growl']).constant('_', window._);
 
 app.config(["growlProvider", function(growlProvider) {
   growlProvider.globalTimeToLive(2000);
