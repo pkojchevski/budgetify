@@ -1,10 +1,10 @@
 angular.module("myApp.controllers",[])
-        .controller("listController", ["$rootScope","$scope","$filter", "Expenses", "recordsByDate",
+        .controller("listController", ["$rootScope","$scope","$filter","$interval", "Expenses", "recordsByDate",
         "recordsByPeriod","_",
-        function($rootScope, $scope, $filter, Expenses, recordsByDate, recordsByPeriod,_) {
+        function($rootScope, $scope, $filter,$interval, Expenses, recordsByDate, recordsByPeriod,_) {
 
-  $rootScope.date = new moment().format("MMMM-YYYY");
-
+$rootScope.date = new moment().format("MMMM-YYYY");
+$scope.loaded = false;
 var begin = moment().format("YYYY-MM-01");
 var end = moment().format("YYYY-MM-") + moment().daysInMonth();
 
@@ -13,11 +13,14 @@ recordsByPeriod.query({'date1':begin, 'date2':end}).$promise.then(function(data)
   console.log('records:'+JSON.stringify($scope.records));
   $scope.labels = $filter('getFromList')($scope.records);
   console.log('labels:'+JSON.stringify($scope.labels));
+  $scope.totalExpenses = $filter('getExpensesTot')($scope.records);
+  $scope.totalIncome = $filter('getIncomeTot')($scope.records);
+  $scope.balance = $scope.totalIncome - $scope.totalExpenses;
 
   $scope.options = {
             chart: {
                 type: 'pieChart',
-                height: 450,
+                height: 350,
                 donut: true,
                 x: function(d){return d.name;},
                 y: function(d){return d.percent;},
@@ -44,6 +47,12 @@ recordsByPeriod.query({'date1':begin, 'date2':end}).$promise.then(function(data)
             }
         };
     $scope.data = $scope.labels;
+
+    $interval(function(){
+      $scope.loaded = true;
+    }, 2000);
+
+
 });
 
 

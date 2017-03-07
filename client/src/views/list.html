@@ -1,7 +1,6 @@
 
   <div class='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1'>
     <div class="row text-center">
-
     </div>
    <ul class="list-group">
      <div class="row">
@@ -10,8 +9,29 @@
          <div class='name' ng-class="{'text-success' : l.income, 'text-danger': !l.income}">
            {{l.name}}
          </div>
-          <span class="value label-as-badge" ng-class="{'label label-success' : l.income, 'label label-danger': !l.income}">{{l.value}}</span>
+          <span class="value label-as-badge" ng-class="{'label label-success' : l.income, 'label label-danger': !l.income}">
+            {{l.value | currency:'zł.'}}</span>
        </li>
      </div>
   </ul>
+  <div ng-show='loaded'>
+  <div class='row text-center'>
+    <div class='col-xs-4 pull-right'>
+      <img ng-src='../../img/plus.png' style='width:30px;float:left'>
+      <span class='plus'> {{totalIncome | currency:'zł.'}} </span>
+   </div>
+  </div>
+  <div class='row text-center'>
+   <div class='col-xs-4 pull-right'>
+    <img ng-src='../../img/minus.png' style='width:30px;float:left'>
+    <span class='minus'>{{totalExpenses | currency:'zł.'}}</span>
+  </div>
+  </div>
+  <div class='row text-center'>
+   <div class='col-xs-4 pull-right'>
+      <img ng-src='../../img/exclamation.png' style='width:30px;float:left'>
+    <span class='exclamation'>{{balance | currency:'zł.'}}</span>
+  </div>
+  </div>
+</div>
 </div>

@@ -2,16 +2,16 @@ angular.module("myApp.filters", []).
 filter('getFromList', function() {
   return function(arr) {
   var arr1 = [];
-  var income=0;
-  angular.forEach(arr, function(item, index) {
-    if(item['income']) {
-      income += item['value'];
-    }
-  });
-  console.log('income:'+income);
+  var expense=0;
   angular.forEach(arr, function(item, index) {
     if(!item['income']) {
-      item['percent'] = (item['value']/income).toFixed(2);
+      expense += item['value'];
+    }
+  });
+  //console.log('income:'+income);
+  angular.forEach(arr, function(item, index) {
+    if(!item['income']) {
+      item['percent'] = (item['value']/expense).toFixed(2);
       arr1.push(item);
     }
   });
@@ -26,7 +26,7 @@ filter('monthlyRecord', function() {
       var occurs = o.reduce(function(n, item, i) {
         return (item.name === cur.name) ? i : n;
       }, -1);
-    console.log('occurs:'+occurs);
+    //console.log('occurs:'+occurs);
       // If the name is found,
       if (occurs >= 0) {
         // append the current value to its list of values.
@@ -40,9 +40,39 @@ filter('monthlyRecord', function() {
         income:cur.income};
         o = o.concat([obj]);
       }
-      console.log('o after concat:'+JSON.stringify(o));
+      //console.log('o after concat:'+JSON.stringify(o));
       return o;
     }, []);
+    return arr1;
+  }
+}).
+filter('getExpensesTot', function() {
+  return function(arr) {
+    var arr1 = arr.map(function(item) {
+      if(!item.income) {
+        return item.value;
+      } else {
+        return 0;
+      }
+    })
+    .reduce(function(a,b) {
+      return a+b;
+    });
+    return arr1;
+  }
+})
+.filter('getIncomeTot', function() {
+  return function(arr) {
+    var arr1 = arr.map(function(item) {
+      if(item.income) {
+        return item.value;
+      } else {
+        return 0;
+      }
+    })
+    .reduce(function(a,b) {
+      return a+b;
+    });
     return arr1;
   }
 });

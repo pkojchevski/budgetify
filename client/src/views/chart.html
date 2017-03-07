@@ -3,5 +3,28 @@
   <!-- <canvas id="doughnut"  class="chart chart-doughnut"
     chart-data="data" chart-labels="labels" chart-options="options">
   </canvas> -->
-   <nvd3 options="options" data="data"></nvd3>
+   <nvd3 options="options" data="data" class="chart"></nvd3>
+
+
+<div ng-show="loaded">
+<div class='row text-center'>
+  <div class='col-xs-4 pull-right'>
+    <img ng-src='../../img/plus.png' style='width:30px;float:left'>
+    <span class='plus'> {{totalIncome | currency:'zł.'}} </span>
+ </div>
+</div>
+<div class='row text-center'>
+ <div class='col-xs-4 pull-right'>
+  <img ng-src='../../img/minus.png' style='width:30px;float:left'>
+  <span class='minus'>{{totalExpenses | currency:'zł.'}}</span>
+</div>
+</div>
+<div class='row text-center'>
+ <div class='col-xs-4 pull-right'>
+    <img ng-src='../../img/exclamation.png' style='width:30px;float:left'>
+  <span class='exclamation'>{{balance | currency:'zł.'}}</span>
+</div>
+</div>
+</div>
+
 </div>

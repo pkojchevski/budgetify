@@ -1,3 +1,6 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 
 .name {
   display:inline;
@@ -120,4 +123,39 @@ small {
 
 @media (max-width: @screen-sm) {
     body{font-size: 14px !important;}
+}
+
+.plus {
+  background-color:limegreen;
+  border-radius:5px;
+  padding:4px 4px;
+  font-weight: bold;
+  font-style:italic;
+  float:right;
+}
+
+.minus {
+  background-color:red;
+  border-radius:5px;
+  padding:4px 4px;
+  font-weight: bold;
+  font-style:italic;
+  float:right;
+}
+
+.exclamation {
+  background-color:orange;
+  border-radius:5px;
+  padding:4px 4px;
+  font-weight: bold;
+  font-style:italic;
+  float:right;
+}
+
+/*.balance {
+  display:absolute;
+}*/
+.cahrt {
+  margin:0;
+  width:50%;
 }
