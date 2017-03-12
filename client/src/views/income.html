@@ -1,8 +1,11 @@
 
-<div class="container text-center" id="calc">
+<div class="container text-center income" id="calc">
   <div class="calcBG col-md-3 col-md-offset-4 text-center">
-    <div class="row">
-      <small>Income: {{incomeCtrl.selectedIncome.name}}</small>
+    <div class="row selectedItem">
+        <small>Income:</small> 
+        <img ng-class = "{'animated':animated, 'imgSelected':!animated}" 
+          ng-src='{{incomeCtrl.selectedIncome.img}}' alt=''/>
+        <small>{{incomeCtrl.selectedIncome.name}}</small>
     </div>
     <div class="row" id="result">
       <form name="calc">
@@ -23,13 +26,13 @@
       <button id="4" type="button" class="btn btn-info" ng-click="incomeCtrl.myFunction(4)">4</button>
       <button id="5" type="button" class="btn btn-info" ng-click="incomeCtrl.myFunction(5)">5</button>
       <button id="6" type="button" class="btn btn-info" ng-click="incomeCtrl.myFunction(6)">6</button>
-      <!-- <button id="-" type="button" class="btn btn-info" ng-click="myFunction(this.id)">-</button> -->
+      <button id="-" type="button" class="btn btn-info" ng-click="">-</button>
     </div>
     <div class="row">
       <button id="1" type="button" class="btn btn-info" ng-click="incomeCtrl.myFunction(1)">1</button>
       <button id="2" type="button" class="btn btn-info" ng-click="incomeCtrl.myFunction(2)">2</button>
       <button id="3" type="button" class="btn btn-info" ng-click="incomeCtrl.myFunction(3)">3</button>
-      <!-- <button id="+" type="button" class="btn btn-info" ng-click="myFunction(this.id)">+</button> -->
+      <button id="+" type="button" class="btn btn-info" ng-click="">+</button>
     </div>
     <div class="row">
       <button id="0" type="button" class="btn btn-info" ng-click="incomeCtrl.myFunction(0)">0</button>
@@ -37,11 +40,12 @@
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
       <button type="button" class="btn btn-info" ng-disabled="!incomeCtrl.ok || !incomeCtrl.ok1"
-      ng-click="incomeCtrl.saveUpdateRecords(incomeCtrl.selectedIncome.name)">
+      ng-click="incomeCtrl.saveUpdateRecords(incomeCtrl.selectedIncome.name)" ng-audio="../../../audio/cash.wav" 
+        volume="0.5" start="0.2"> 
         <i class="fa fa-save" aria-hidden="true"></i>
       </button>
+       <button id="+" type="button" class="btn btn-info" ng-click="">=</button>
     </div>
-
   </div>
 </div>
-</div>
+

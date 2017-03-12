@@ -1,12 +1,12 @@
 
-  <div class='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1'>
+  <div class='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 list'>
     <div class="row text-center">
     </div>
    <ul class="list-group">
      <div class="row">
        <li class="list-group-item" ng-repeat= 'l in records'>
          <span><img class='image' src={{l.img}}></img></span>
-         <div class='name' ng-class="{'text-success' : l.income, 'text-danger': !l.income}">
+         <div ng-click='openItem(l)' class='name' ng-class="{'text-success' : l.income, 'text-danger': !l.income}">
            {{l.name}}
          </div>
           <span class="value label-as-badge" ng-class="{'label label-success' : l.income, 'label label-danger': !l.income}">
@@ -16,21 +16,21 @@
   </ul>
   <div ng-show='loaded'>
   <div class='row text-center'>
-    <div class='col-xs-4 pull-right'>
+    <div class='col-xs-6 pull-right'>
       <img ng-src='../../img/plus.png' style='width:30px;float:left'>
-      <span class='plus'> {{totalIncome | currency:'zł.'}} </span>
+      <span class='plus'> {{totalIncome | currency:'zł'}} </span>
    </div>
   </div>
   <div class='row text-center'>
-   <div class='col-xs-4 pull-right'>
+   <div class='col-xs-6 pull-right'>
     <img ng-src='../../img/minus.png' style='width:30px;float:left'>
-    <span class='minus'>{{totalExpenses | currency:'zł.'}}</span>
+    <span class='minus'>{{totalExpenses | currency:'zł'}}</span>
   </div>
   </div>
   <div class='row text-center'>
-   <div class='col-xs-4 pull-right'>
+   <div class='col-xs-6 pull-right'>
       <img ng-src='../../img/exclamation.png' style='width:30px;float:left'>
-    <span class='exclamation'>{{balance | currency:'zł.'}}</span>
+    <span class='exclamation'>{{balance | currency:'zł'}}</span>
   </div>
   </div>
 </div>

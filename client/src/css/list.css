@@ -2,14 +2,37 @@
   display: none !important;
 }
 
+.li ng-enter {
+animation:bounceIn 1s;
+}
+
+.li ng-leave {
+  animation:bounceOut 2s;
+}
+
 .name {
   display:inline;
+}
+
+.div-chart {
+  width:100%;
+  height:350px;
 }
 
 .value {
   display:inline;
   float:right;
 }
+
+.imgSelected {
+   width:25px;
+   height:25px;
+   border-style: none;
+}
+
+IMG[src=''], IMG:not([src])      
+{opacity:0;}
+
 
 .image {
   width:25px;
@@ -18,15 +41,55 @@
   text-align:center;
 }
 
+.animated {
+  animation: zoom ease-out 0.5s;
+  /*transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;*/
+  /*overflow: hidden;*/
+  transition: all 0.5s ease-out;
+}
+
+-webkit-@keyframes zoom {
+  0% {transform: scale(1);}
+  25% {transform: scale(1.5);}
+ 50% {transform: scale(2);}
+  75% {transform: scale(6);}
+  85% {transform: scale(8);}
+  95% {transform: scale(9);}
+  96% {transform: scale(9);}
+  97% {transform: scale(9);}
+  100% {transform: scale(10);}
+}
+
+@keyframes zoom {
+    0% {transform: scale(1);}
+  25% {transform: scale(1.5);}
+  50% {transform: scale(2);}
+  75% {transform: scale(6);}
+  85% {transform: scale(8);}
+  95% {transform: scale(9);}
+  96% {transform: scale(9);}
+  97% {transform: scale(9);}
+  100% {transform: scale(10);}
+}
+ 
+
+/*.animated.ng-enter {
+  -webkit-animation:zoomOut 5s;
+  animation:zoomOut 5s;
+}*/
+
+
 
 body {
 background: #83a4d4; /* fallback for old browsers */
 background: -webkit-linear-gradient(to left, #83a4d4 , #b6fbff); /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to left, #83a4d4 , #b6fbff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 input{
   border: none;
 }
+
 button {
   height: 50px;
   width: 50px;
@@ -34,25 +97,8 @@ button {
   box-shadow: inset 1px 1px 50px  #0066FF;
   border: none !important;
 }
-*:focus {
-    outline: 0 !important;
-}
-#allClear {
-  box-shadow: inset 1px 1px 50px  #990000;
-  border: none;
-}
-#clear {
-  box-shadow: inset 1px 1px 50px  #CC6600;
-  border: none;
-}
-#equals{
-  box-shadow: inset 1px 1px 50px #006633;
-  border: none;
-}
-/* Hidden button for formatting sake */
-#blank {
-  visibility: hidden;
-}
+
+
 .calcBG {
   background-color: #0000CC;
   border-radius: 20px;
@@ -61,6 +107,7 @@ button {
   margin-bottom: 50px;
   box-shadow: inset 1px 1px 50px #000;
 }
+
 .screen {
   height: 40px;
   border-radius: 10px;
@@ -74,55 +121,38 @@ background: #8e9eab; /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #8e9eab , #eef2f3); /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #8e9eab , #eef2f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  box-shadow: 0px 4px  #000099 inset;
+box-shadow: 0px 4px  #000099 inset;
 
 }
+
 small {
   color: #fff;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .list-group-item {
   margin-top:20px;
 }
 
-
-/*
-.nvd3 text{
-   font-family: FontAwesome !important;
-   display: inline-block;
-   font: normal normal normal 20px/1 FontAwesome !important;
-   font-size: inherit;
-   text-rendering: auto;
-   -webkit-font-smoothing: antialiased;
-}
-
-.nvtooltip {
-  font-family: FontAwesome !important;
-  display: inline-block;
-  font: normal normal normal 25px/1 FontAwesome !important;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-}*/
-
 .full button span {
     background-color: limegreen;
     border-radius: 32px;
     color: black;
   }
+
   .partially button span {
     background-color: orange;
     border-radius: 32px;
     color: black;
   }
 
-@media (max-width: @screen-xs) {
-    body{font-size: 5px !important;}
+@media (max-width: 474px) {
+    body{font-size: 12px !important;}
 }
 
 @media (max-width: @screen-sm) {
-    body{font-size: 14px !important;}
+    body{font-size: 9px !important;}
 }
 
 .plus {
@@ -152,10 +182,27 @@ small {
   float:right;
 }
 
-/*.balance {
-  display:absolute;
-}*/
-.cahrt {
-  margin:0;
-  width:50%;
+.modal-body {
+  height:900px;
 }
+
+
+.list, .calculator, .chart, .expenses, .income {
+  position:absolute;
+
+}
+
+.income, .expenses {
+  width:100%;
+}
+
+.main.ng-enter {
+    -webkit-animation:slideInRight 0.75s;
+     animation: slideInRight 0.75s;
+}
+
+.main.ng-leave {
+  -webkit-animation:slideOutLeft 0.75s;
+  animation: slideOutLeft 0.75s;
+}
+

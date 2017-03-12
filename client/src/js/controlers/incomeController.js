@@ -1,10 +1,22 @@
 angular.module("myApp.controllers")
-.controller("incomeController",["$scope","$filter","$uibModal", "$log", "Incomes","Records",
-"recordsByDate","messages",
- function($scope, $filter, $uibModal, $log, Incomes, Records, recordsByDate, messages) {
+.controller("incomeController",["$scope","$filter","$uibModal", "$log", "$location", "$timeout", 
+  "Incomes","Records", "recordsByDate","messages", "shareObjects",
+ function($scope, $filter, $uibModal, $log, $location, $timeout, Incomes, Records, recordsByDate, 
+  messages,shareObjects) {
+
 var incomeCtrl = this;
 incomeCtrl.ok = false;
 incomeCtrl.ok1 = false;
+$scope.animated = false;
+
+incomeCtrl.selectedIncome = shareObjects.getObject()[0] || null;
+console.log('selectedIncome:'+JSON.stringify(incomeCtrl.selectedIncome));
+
+if(incomeCtrl.selectedIncome) {
+  console.log('equals');
+  incomeCtrl.ok = true;
+  incomeCtrl.ok1 = true;
+}
 
 incomeCtrl.removeIncome = function (income) {
   if(income) {
@@ -94,12 +106,12 @@ incomeCtrl.myFunction = function(id) {
      income:incomeCtrl.selectedIncome.income,
      createdAt:new Date().toJSON().slice(0,10)
    });
-   console.log('record:'+JSON.stringify(record));
+
    record.$save(function(response) {
      console.log('record is saved!');
      incomeCtrl.result='';
      incomeCtrl.ok = false;
-     messages('add');
+     $scope.animated = true;
    }, function(errorResponse) {
      incomeCtrl.error = errorResponse;
    });
@@ -122,8 +134,6 @@ incomeCtrl.saveUpdateRecords = function(name) {
   var arr=[];
   recordsByDate.query({'createdAt':new Date().toJSON().slice(0,10)}).$promise.then(function(data) {
     incomeCtrl.records = data;
-    console.log('incomeCtrl.records:'+incomeCtrl.records.length);
-    console.log('incomeCtrl.records:'+JSON.stringify(incomeCtrl.records));
 
     //if record exists update it!
       if(incomeCtrl.records.length !== 0) {
@@ -145,21 +155,34 @@ incomeCtrl.saveUpdateRecords = function(name) {
             income:arr[0].income,
             createdAt:new Date().toJSON().slice(0,10)
           });
-          console.log('record:'+JSON.stringify(record));
           record.$update(function(response) {
             console.log('record is updated!');
             incomeCtrl.result='';
             incomeCtrl.ok = false;
-            messages('update');
+            $scope.animated = true;
+            $timeout(function() {
+              console.log('list is running');
+              $location.path('/list');
+            },300);
           }, function(errorResponse) {
             incomeCtrl.error = errorResponse;
           });
         } else {
+          $scope.animated = true;
+          $timeout(function() {
+             console.log('list is running');
+              $location.path('/list');
+            },300);
           incomeCtrl.createRecord();
         }
       }
        //if record does not exist save new record in db
           else {
+            $scope.animated = true;
+            $timeout(function() {
+               console.log('list is running');
+              $location.path('/list');
+            },300);
             incomeCtrl.createRecord();
           }
   });

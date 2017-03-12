@@ -74,4 +74,30 @@ services.factory("messages",["growl",function(growl) {
       growl.error("Pojawił się błąd, sprobuj ponownie!!!", config);
   }
 };
-   }]);
+}]);
+
+services.factory('shareObjects', function() {
+  var objList = [];
+
+  var addObject = function(obj) {
+     objList = [];
+     objList.push(obj);
+  }
+
+  var getObject = function() {
+    return objList;
+  }
+
+  var deleteObject = function() {
+    objList = [];
+  }
+
+  return {
+    addObject:addObject,
+    getObject:getObject,
+    deleteObject:deleteObject
+  }
+
+
+});
+

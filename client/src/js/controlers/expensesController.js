@@ -1,10 +1,24 @@
 angular.module("myApp.controllers")
-.controller("expensesController",["$scope","$filter","$uibModal", "$log", "Expenses","Records",
-"recordsByDate","messages",
- function($scope, $filter, $uibModal, $log, Expenses, Records, recordsByDate, messages) {
+.controller("expensesController",["$scope","$filter","$uibModal", "$log", '$location', '$timeout',
+  "Expenses","Records", "recordsByDate","messages", 'shareObjects', 
+ function($scope, $filter, $uibModal, $log, $location, $timeout, Expenses, Records, recordsByDate, messages, shareObjects) {
 var $ctrl = this;
 $ctrl.ok = false;
 $ctrl.ok1 = false;
+$scope.animated = false;
+
+$ctrl.selectedExpense = shareObjects.getObject()[0] || null;
+
+if($ctrl.selectedExpense) {
+  console.log('equals');
+  $ctrl.ok = true;
+  $ctrl.ok1 = true;
+}
+
+$ctrl.play = function() {
+  var audio = document.getElementById('audio');
+  audio.play();
+};
 
 $ctrl.removeExpense = function (expense) {
   if(expense) {
@@ -101,7 +115,6 @@ $ctrl.myFunction = function(id) {
      console.log('record is saved!');
      $ctrl.result='';
      $ctrl.ok = false;
-     messages('add');
    }, function(errorResponse) {
      $ctrl.error = errorResponse;
    });
@@ -121,11 +134,10 @@ $ctrl.myFunction = function(id) {
  };
 
 $ctrl.saveUpdateRecords = function(name) {
+  console.log('button is clicked');
   var arr=[];
   recordsByDate.query({'createdAt':new Date().toJSON().slice(0,10)}).$promise.then(function(data) {
     $ctrl.records = data;
-    console.log('$ctrl.records:'+$ctrl.records.length);
-    console.log('$ctrl.records:'+JSON.stringify($ctrl.records));
     //if record exists update it!
       if($ctrl.records.length !== 0) {
         console.log('records is empty');
@@ -136,6 +148,7 @@ $ctrl.saveUpdateRecords = function(name) {
           }
             return exist;
         });
+
       if(arr.length !== 0) {
         arr[0].value += parseInt($ctrl.result);
         var record = new Records({
@@ -146,23 +159,34 @@ $ctrl.saveUpdateRecords = function(name) {
           income:arr[0].income,
           createdAt:new Date().toJSON().slice(0,10)
         });
-        console.log('record:'+JSON.stringify(record));
+
         record.$update(function(response) {
           console.log('record is updated!');
           $ctrl.result='';
           $ctrl.ok = false;
-          messages('update');
+          $scope.animated = true;
+           $timeout(function() {
+              $location.path('/list');
+            },300);
         }, function(errorResponse) {
           $ctrl.error = errorResponse;
         });
       } else {
-         //if record does not exist save new record in dbelse {
+         //if record does not exist save new record in db else {
         $ctrl.createRecord();
+        $scope.animated = true;
+         $timeout(function() {
+              $location.path('/list');
+            },300);
       }
     }
        //if record does not exist save new record in db
           else {
             $ctrl.createRecord();
+            $scope.animated = true;
+             $timeout(function() {
+              $location.path('/list');
+            },300);
           }
   });
 }

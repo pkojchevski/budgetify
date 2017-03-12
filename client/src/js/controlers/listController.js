@@ -1,12 +1,20 @@
 angular.module("myApp.controllers",[])
-        .controller("listController", ["$rootScope","$scope","$filter","$interval", "Expenses", "recordsByDate",
-        "recordsByPeriod","_",
-        function($rootScope, $scope, $filter,$interval, Expenses, recordsByDate, recordsByPeriod,_) {
+        .controller("listController", ["$rootScope","$scope","$filter","$interval", "$location",
+        "Expenses", "recordsByDate", "recordsByPeriod", 'shareObjects', 'ngAudio',
+        function($rootScope, $scope, $filter,$interval,$location, Expenses, recordsByDate, recordsByPeriod, 
+          shareObjects, ngAudio) {
 
 $rootScope.date = new moment().format("MMMM-YYYY");
 $scope.loaded = false;
 var begin = moment().format("YYYY-MM-01");
 var end = moment().format("YYYY-MM-") + moment().daysInMonth();
+shareObjects.deleteObject();
+
+$scope.audio = ngAudio.load('../../../audio/woosh.wav');
+$scope.playSound = function(){
+   console.log('button is clicked');
+  $scope.audio.play();
+}
 
 recordsByPeriod.query({'date1':begin, 'date2':end}).$promise.then(function(data) {
   $scope.records = $filter('monthlyRecord')(data);
@@ -51,9 +59,20 @@ recordsByPeriod.query({'date1':begin, 'date2':end}).$promise.then(function(data)
     $interval(function(){
       $scope.loaded = true;
     }, 2000);
-
-
 });
+
+
+$scope.openItem = function(item) {
+
+  if(item.income) {
+    $location.path('/income');
+
+  } else {
+    $location.path('/expenses');
+  }
+  shareObjects.addObject(item);
+  
+}
 
 
   }]);

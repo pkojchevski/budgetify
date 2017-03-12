@@ -1,5 +1,5 @@
-var app=angular.module("myApp",['ngRoute',"myApp.controllers", "myApp.services","myApp.directives",
-  "myApp.filters", "nvd3", 'ui.bootstrap', 'angular-growl']).constant('_', window._);
+var app=angular.module("myApp",['ngRoute','ngAnimate',"myApp.controllers", "myApp.services","myApp.directives",
+  "myApp.filters", "nvd3", 'ui.bootstrap', 'angular-growl', 'ngAudio']).constant('_', window._);
 
 app.config(["growlProvider", function(growlProvider) {
   growlProvider.globalTimeToLive(2000);
@@ -47,3 +47,4 @@ controller:"calendarController"
   $httpProvider.defaults.headers.patch = {};
   $httpProvider.defaults.headers.options = {};
 });
+
