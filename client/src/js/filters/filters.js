@@ -26,7 +26,6 @@ filter('monthlyRecord', function() {
       var occurs = o.reduce(function(n, item, i) {
         return (item.name === cur.name) ? i : n;
       }, -1);
-    //console.log('occurs:'+occurs);
       // If the name is found,
       if (occurs >= 0) {
         // append the current value to its list of values.
@@ -43,7 +42,9 @@ filter('monthlyRecord', function() {
       //console.log('o after concat:'+JSON.stringify(o));
       return o;
     }, []);
-    return arr1;
+    return arr1.sort(function(a,b) {
+      return b.value-a.value;
+    });
   }
 }).
 filter('getExpensesTot', function() {
