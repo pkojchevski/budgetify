@@ -1,7 +1,7 @@
 var services=angular.module("myApp.services",["ngResource"]);
 
 services.factory("Expenses", function($resource) {
-  return $resource('/expenses/:expensesId',
+  return $resource('http://localhost:3000/expenses/:expensesId',
   {expensesId:'@expensesId'},
   { update: {
     method:'PUT'
@@ -10,7 +10,7 @@ services.factory("Expenses", function($resource) {
 });
 
 services.factory("Incomes", function($resource) {
-  return $resource('/incomes/:incomesId',
+  return $resource('http://localhost:3000/incomes/:incomesId',
   {incomesId:'@incomesId'},
   { update: {
     method:'PUT'
@@ -19,7 +19,7 @@ services.factory("Incomes", function($resource) {
 });
 
 services.factory("Records", function($resource) {
-  return $resource('/records/:recordsId',
+  return $resource('http://localhost:3000/records/:recordsId',
   {recordsId:'@recordsId'},
   { update: {
     method:'PUT'
@@ -28,13 +28,13 @@ services.factory("Records", function($resource) {
 });
 
 services.factory("recordsByDate", function($resource) {
-  return $resource('/records/bydate/:createdAt',
+  return $resource('http://localhost:3000/records/bydate/:createdAt',
   {createdAt:'@createdAt'}
 );
 });
 
 services.factory("recordsByPeriod", function($resource) {
-  return $resource('/records/month/:date1/:date2',
+  return $resource('http://localhost:3000/records/month/:date1/:date2',
   {date1:'@date1', date2:'@date2'}
 );
 });

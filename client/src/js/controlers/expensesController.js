@@ -15,10 +15,6 @@ if($ctrl.selectedExpense) {
   $ctrl.ok1 = true;
 }
 
-$ctrl.play = function() {
-  var audio = document.getElementById('audio');
-  audio.play();
-};
 
 $ctrl.removeExpense = function (expense) {
   if(expense) {

@@ -67,6 +67,18 @@ app.get('/incomes', function(req, res) {
   });
 });
 
+app.get('/records/bydateandname/:createdAt/:name',function(req, res) {
+  console.log("params from $http.get:"+JSON.stringify(req.params));
+  Record.find({"createdAt":new Date(req.params.createdAt), 'name':req.params.name}).exec(function(err, record) {
+    if(err) {
+      res.send(err);
+    } else {
+      console.log('record:'+JSON.stringify(record));
+      res.json(record);
+      }
+  })
+});
+
 app.get('/records/bydate/:createdAt',function(req, res) {
   //console.log("date:"+JSON.stringify(new Date(req.params.prodData)));
   Record.find({"createdAt":{"$gte":+new Date(req.params.createdAt)}}).exec(function(err, record) {
@@ -98,6 +110,7 @@ app.get('/records/month/:date1/:date2',function(req, res) {
   })
 });
 
+
 app.post('/records', function(req,res) {
   var newRecord = new Record();
 //  console.log("post:"+JSON.stringify(req.body));
@@ -126,3 +139,18 @@ app.put('/records', function(req,res) {
       }
     );
 });
+
+app.delete('/records/:recordId', function(req,res) {
+  console.log('record delete:'+JSON.stringify(req.params));
+  Record.findByIdAndRemove(req.params.recordId, function(err, record) {
+    if(err) {
+      res.send({status:'error', msg:'error'});
+    } else {
+      console.log('dailyRecords:'+record);
+      res.send({status:'success', msg:'record is updated'});
+    }
+
+      }
+    );
+});
+
