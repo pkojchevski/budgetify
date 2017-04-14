@@ -68,7 +68,7 @@ app.get('/incomes', function(req, res) {
 });
 
 app.get('/records/bydateandname/:createdAt/:name',function(req, res) {
-  console.log("params from $http.get:"+JSON.stringify(req.params));
+  //console.log("params from $http.get:"+JSON.stringify(req.params));
   Record.find({"createdAt":new Date(req.params.createdAt), 'name':req.params.name}).exec(function(err, record) {
     if(err) {
       res.send(err);
@@ -119,6 +119,7 @@ app.post('/records', function(req,res) {
   newRecord.income = req.body.income;
   newRecord.img = req.body.img;
   newRecord.createdAt = req.body.createdAt;
+  newRecord.details = req.body.details;
   newRecord.save(function(err,record) {
     if(err) {
       res.send("error");
