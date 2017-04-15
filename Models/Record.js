@@ -6,7 +6,8 @@ name: {type:String, required:true},
 createdAt: {type: Date},
 value: {type:Number, required:true, trim:true},
 income:{type:Boolean, required:true},
-img:{type:String, required:true}
+img:{type:String, required:true},
+details:{type:String}
 });
 
 var Record = mongoose.model('Record', RecordSchema);
