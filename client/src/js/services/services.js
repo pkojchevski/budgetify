@@ -1,7 +1,8 @@
 var services=angular.module("myApp.services",["ngResource"]);
-
+var localhost = 'https://young-woodland-85394.herokuapp.com';
+//var localhost = 'https://localhost:3000';
 services.factory("Expenses", function($resource) {
-  return $resource('http://localhost:3000/expenses/:expensesId',
+  return $resource(localhost+'/expenses/:expensesId',
   {expensesId:'@expensesId'},
   { update: {
     method:'PUT'
@@ -10,7 +11,7 @@ services.factory("Expenses", function($resource) {
 });
 
 services.factory("Incomes", function($resource) {
-  return $resource('http://localhost:3000/incomes/:incomesId',
+  return $resource(localhost+'/incomes/:incomesId',
   {incomesId:'@incomesId'},
   { update: {
     method:'PUT'
@@ -19,7 +20,7 @@ services.factory("Incomes", function($resource) {
 });
 
 services.factory("Records", function($resource) {
-  return $resource('http://localhost:3000/records/:recordsId',
+  return $resource(localhost+'/records/:recordsId',
   {recordsId:'@recordsId'},
   { update: {
     method:'PUT'
@@ -28,13 +29,13 @@ services.factory("Records", function($resource) {
 });
 
 services.factory("recordsByDate", function($resource) {
-  return $resource('http://localhost:3000/records/bydate/:createdAt',
+  return $resource(localhost+'/records/bydate/:createdAt',
   {createdAt:'@createdAt'}
 );
 });
 
 services.factory("recordsByPeriod", function($resource) {
-  return $resource('http://localhost:3000/records/month/:date1/:date2',
+  return $resource(localhost+'/records/month/:date1/:date2',
   {date1:'@date1', date2:'@date2'}
 );
 });
