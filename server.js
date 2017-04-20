@@ -50,7 +50,7 @@ app.get('/expenses', function(req, res) {
     if(err) {
       res.send('error:'+err);
     } else {
-      console.log('expense:'+JSON.stringify(expenses));
+      // console.log('expense:'+JSON.stringify(expenses));
       res.json(expenses);
     }
   });
@@ -61,7 +61,7 @@ app.get('/incomes', function(req, res) {
     if(err) {
       res.send('error:'+err);
     } else {
-      console.log('incomes:'+JSON.stringify(incomes));
+      // console.log('incomes:'+JSON.stringify(incomes));
       res.json(incomes);
     }
   });
@@ -73,7 +73,7 @@ app.get('/records/bydateandname/:createdAt/:name',function(req, res) {
     if(err) {
       res.send(err);
     } else {
-      console.log('record:'+JSON.stringify(record));
+      // console.log('record:'+JSON.stringify(record));
       res.json(record);
       }
   })
@@ -85,7 +85,7 @@ app.get('/records/bydate/:createdAt',function(req, res) {
     if(err) {
       res.send('error has occured:'+err);
     } else {
-      console.log('record:'+JSON.stringify(record));
+      // console.log('record:'+JSON.stringify(record));
       if(record.length !== 0) {
           res.json(record);
       } else {
@@ -97,14 +97,14 @@ app.get('/records/bydate/:createdAt',function(req, res) {
 });
 
 app.get('/records/month/:date1/:date2',function(req, res) {
-  console.log('date1:'+req.params.date1);
-  console.log('date2:'+req.params.date2);
+  //console.log('date1:'+req.params.date1);
+  //console.log('date2:'+req.params.date2);
   Record.find({'createdAt':{"$gte":req.params.date1,
   "$lt":req.params.date2}}).exec(function(err, records) {
     if(err) {
       res.send('error has occured');
     } else {
-      console.log(JSON.stringify(records));
+      //console.log(JSON.stringify(records));
       res.json(records);
     }
   })
@@ -124,30 +124,37 @@ app.post('/records', function(req,res) {
     if(err) {
       res.send("error");
     } else {
-      console.log('record:'+JSON.stringify(record));
+      // console.log('record:'+JSON.stringify(record));
       res.send(record);
     }
   });
 });
 
 app.put('/records', function(req,res) {
-  console.log("put:"+JSON.stringify(req.body));
-  Record.findOneAndUpdate({
-    _id:req.body._id
-  }, req.body, function(err, record) {
-    console.log('dailyRecords:'+record);
+  //console.log("put:"+JSON.stringify(req.body));
+  var obj = req.body;
+  var id = obj._id;
+  delete obj._id;
+  Record.update({
+    _id:id || mongoose.Types.ObjectId() 
+  }, obj, { upsert: true, new:true, setDefaultsOnInsert: true },
+   function(err, record) {
+    if (err) {
+      res.send(err);
+    } else {
       res.send(record);
-      }
-    );
+    };
+});
+
 });
 
 app.delete('/records/:recordId', function(req,res) {
-  console.log('record delete:'+JSON.stringify(req.params));
+  //console.log('record delete:'+JSON.stringify(req.params));
   Record.findByIdAndRemove(req.params.recordId, function(err, record) {
     if(err) {
       res.send({status:'error', msg:'error'});
     } else {
-      console.log('dailyRecords:'+record);
+      //console.log('dailyRecords:'+record);
       res.send({status:'success', msg:'record is updated'});
     }
 
