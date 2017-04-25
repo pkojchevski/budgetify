@@ -79,17 +79,17 @@ app.get('/records/bydateandname/:createdAt/:name',function(req, res) {
   })
 });
 
-app.get('/records/bydate/:createdAt',function(req, res) {
+app.get('/records/bydate/:createdAt', function(req, res) {
   //console.log("date:"+JSON.stringify(new Date(req.params.prodData)));
-  Record.find({"createdAt":{"$gte":+new Date(req.params.createdAt)}}).exec(function(err, record) {
+  Record.find({"createdAt":new Date(req.params.createdAt)}).exec(function(err, record) {
     if(err) {
       res.send('error has occured:'+err);
     } else {
-      // console.log('record:'+JSON.stringify(record));
+      console.log('record:'+JSON.stringify('record by date:'+record));
       if(record.length !== 0) {
           res.json(record);
       } else {
-        res.json([record]);
+          res.json([record]);
       }
 
       }
