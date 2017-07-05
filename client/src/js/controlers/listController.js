@@ -16,6 +16,7 @@ $scope.playSound = function(){
   $scope.audio.play();
 }
 
+console.log('end:'+end);
 recordsByPeriod.query({'date1':begin, 'date2':end}).$promise.then(function(data) {
   $scope.records = $filter('monthlyRecord')(data);
   console.log('records:'+JSON.stringify($scope.records));

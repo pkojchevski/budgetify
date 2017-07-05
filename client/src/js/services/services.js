@@ -1,6 +1,6 @@
 var services=angular.module("myApp.services",["ngResource"]);
-var localhost = 'https://young-woodland-85394.herokuapp.com';
-//var localhost = 'https://localhost:3000';
+//var localhost = 'https://young-woodland-85394.herokuapp.com';
+var localhost = 'https://localhost:3000';
 services.factory("Expenses", function($resource) {
   return $resource(localhost+'/expenses/:expensesId',
   {expensesId:'@expensesId'},
