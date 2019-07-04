@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +15,8 @@
     "express": "^4.14.0",
     "moment": "^2.17.1",
     "mongodb": "^2.2.24",
-    "mongoose": "^4.6.5"
-  }
+    "mongoose": "^4.6.5",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
